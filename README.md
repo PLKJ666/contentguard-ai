@@ -1,145 +1,195 @@
 # ContentGuard AI
 
-ContentGuard AI（内容卫士 AI 审核平台）是一个面向品牌内容团队、代理商和创作者的营销内容合规工作台。
+## 内容卫士 AI 审核平台
 
-它把 Brief、规则、脚本、视频和人工审核串成一条可追踪的内容交付流程：AI 负责多模态预审，代理商负责初审，品牌方可以进行终审，创作者可以查看反馈并发起申诉。
+ContentGuard AI 是一个面向品牌内容团队、代理商和创作者的营销内容合规审核工作台。平台将 Brief、品牌规则、脚本、视频、AI 预审和人工复核串成一条可追踪的内容交付流程。
 
-> This repository is a personal portfolio adaptation. Production credentials, private endpoints, company identifiers, and deployment access are intentionally excluded.
+> 本仓库是用于个人作品集展示的独立改编版本。生产凭据、真实业务数据、私有域名、公司标识和部署访问信息均未包含在仓库中。
 
-## Core Workflow
+## 核心流程
 
 ```text
-Project -> Brief -> Creator Task
-                  -> Script AI Review
-                  -> Agency Review
-                  -> Optional Brand Review
-                  -> Video Upload
-                  -> Video AI Review
-                  -> Agency Review
-                  -> Optional Brand Review
-                  -> Completed
+Project 项目
+    -> Brief 内容 Brief
+    -> Task 创作任务
+    -> 脚本上传
+    -> 脚本 AI 审核
+    -> 代理商审核
+    -> 品牌方终审（可选）
+    -> 视频上传
+    -> 视频 AI 审核
+    -> 代理商审核
+    -> 品牌方终审（可选）
+    -> 完成
 ```
 
-The workflow preserves separate script and video stages. Rejected scripts return to script upload; rejected videos return to video upload. AI findings are surfaced to human reviewers instead of directly replacing the human decision.
+平台保留脚本和视频两套独立审核阶段。脚本被驳回时回到脚本上传，视频被驳回时回到视频上传。AI 负责提供结构化分析和建议，最终决策仍由具备权限的人工角色完成。
 
-## Role Model
+## 角色模型
 
-- **Brand**: creates projects, manages agencies, configures Brief/rules/AI, and performs final review.
-- **Agency**: manages creators, creates tasks, reviews AI findings, and coordinates delivery.
-- **Creator**: uploads scripts and videos, reads review results, and submits appeals.
-- **Operator**: works inside an isolated workspace for project, task, rule, AI, and XHS operations.
+| 角色 | 主要职责 |
+| --- | --- |
+| 品牌方 | 创建项目、维护 Brief 和规则、管理代理商、执行最终审核 |
+| 代理商 | 管理创作者、创建任务、处理 AI 结果、协调内容交付 |
+| 创作者 | 上传脚本和视频、查看反馈、提交申诉 |
+| 运营人员 | 在独立工作空间中管理项目、任务、规则、AI 配置和小红书批次 |
 
-Authentication uses Logto JWTs. Tenant context is resolved by the backend and is used for AI configuration, compliance rules, and the XHS workspace.
+认证由 Logto 负责，后端验证 Logto JWT 的签名、issuer 和 audience。租户上下文由后端统一解析，并用于隔离项目、任务、规则、AI 配置和小红书工作台数据。
 
-## AI Review Pipeline
+## AI 审核流水线
 
-### Script review
+### 脚本审核
 
-The script reviewer combines the project Brief, platform rules, forbidden words, competitor data, and learned brand rules. The AI response is normalized into structured dimensions:
+脚本审核会结合项目 Brief、平台规则、禁用词、竞品信息和品牌学习规则，输出结构化结果，包括：
 
-- legal compliance
-- platform rules
-- brand safety
-- Brief selling-point coverage
-- content quality
-- brand exposure
-- violations and suggested rewrites
+- 法律合规
+- 平台规范
+- 品牌安全
+- Brief 卖点覆盖
+- 内容质量
+- 品牌露出
+- 违规项和修改建议
 
-### Video review
+### 视频审核
 
-The video pipeline downloads the submitted file, extracts audio and keyframes, runs ASR and OCR, checks visual evidence, and merges the results into a structured report. Long-running work can run through Celery and Redis, while the API exposes progress through SSE notifications.
+视频审核会下载提交文件，提取音频和关键帧，执行 ASR、OCR、画面分析和多模态判断，再合并为结构化审核报告。耗时任务可以通过 Celery 和 Redis 执行，处理进度通过 SSE 推送到前端。
 
-## XHS Batch Rewriting
+## 小红书批量改写
 
-The agency/operator workspace also contains a separate Xiaohongshu batch rewriting workflow:
+代理商和运营工作台包含独立的小红书批量内容改写流程：
 
 ```text
-XHS Project -> Variants -> Directions -> Versioned Packs
-             -> Trial/Full Batch -> AI Editor -> AI Verifier
-             -> Retry / Safe Rewrite / Manual Decision
-             -> Markdown or Feishu Export
+小红书项目
+    -> 内容变体
+    -> 改写方向
+    -> 版本化规则包
+    -> 试运行或完整批次
+    -> AI 改写
+    -> AI 校验
+    -> 重试 / 安全改写 / 人工决策
+    -> Markdown 或飞书文档导出
 ```
 
-Each note is tracked independently with source text, model metadata, verifier output, retry state, final copy, and export history.
+每条内容都会记录原文、模型信息、校验结果、重试状态、最终文案和导出记录。
 
-## Architecture
+## 技术架构
 
 ```text
-Browser
+浏览器
   -> Nginx
-      -> Next.js frontend
+      -> Next.js 前端
           -> FastAPI API
               -> PostgreSQL / Alembic
               -> Redis / Celery
-              -> TOS or local file storage
-              -> OpenAI-compatible AI provider
+              -> TOS 或本地文件存储
+              -> 兼容 OpenAI API 的 AI 服务
 ```
 
-The current codebase uses a monolithic FastAPI backend with worker processes. The design documents include future ideas such as independent AI services and vector retrieval; those ideas are not represented as shipped microservices unless the code says so.
+当前实现是单体 FastAPI 后端加 Celery worker 的架构，不把规划中的微服务、向量检索或 WebSocket 能力描述为已交付功能。
 
-## Repository Layout
+## 技术栈
+
+- 前端：Next.js 14、React、TypeScript、TailwindCSS、Vitest
+- 后端：FastAPI、SQLAlchemy 2.0、Pydantic、Alembic、pytest
+- 数据与异步：PostgreSQL、Redis、Celery
+- 认证：Logto
+- 文件：TOS 兼容对象存储，支持本地开发回退
+- 部署：Docker Compose、Nginx、可选 Drone/GitLab CI 模板
+
+## 项目目录
 
 ```text
-backend/       FastAPI API, SQLAlchemy models, Celery tasks, migrations, tests
-frontend/      Next.js App Router application and Vitest tests
-docs/          User, deployment, and feature documentation
-nginx/         Reverse proxy configuration
-scripts/       Local development and deployment helpers
+backend/       FastAPI API、数据模型、服务、Celery 任务、迁移和测试
+frontend/      Next.js App Router 应用和 Vitest 测试
+docs/          用户、部署、功能和 CI/CD 文档
+featuredoc/    历史需求、设计和测试规划文档
+nginx/         反向代理配置
+scripts/       本地开发、备份和部署脚本
 ```
 
-## Local Development
+## 本地开发
 
-Prerequisites:
+环境要求：
 
 - Python 3.11+
 - Node.js 18+
 - PostgreSQL 16+
 - Redis 7+
-- Docker Desktop (optional, for Compose)
+- Docker Desktop（可选）
 
-Create local environment files from the examples and provide your own Logto, database, Redis, AI, and object-storage values. Do not commit those files.
+复制环境模板：
 
 ```powershell
 Copy-Item .env.example .env
 Copy-Item backend/.env.example backend/.env
+```
 
+安装并运行后端：
+
+```powershell
 Set-Location backend
 uv sync --extra dev
 uv run alembic upgrade head
 uv run pytest -q
-
-Set-Location ../frontend
-npm ci
-npm run lint
-npx tsc --noEmit
-npm test -- --run
 ```
 
-The Compose files are deployment templates. They require the referenced environment files and external service credentials before they can start a complete authenticated environment.
+运行前端：
 
-## Configuration and Secrets
+```powershell
+Set-Location frontend
+npm ci
+npm run dev
+```
 
-Required values depend on the environment:
+也可以使用 Docker Compose：
 
-- `LOGTO_ENDPOINT`, `LOGTO_APP_ID`, `LOGTO_APP_SECRET`, `LOGTO_COOKIE_SECRET`, `LOGTO_API_RESOURCE`
-- `SECRET_KEY` and `OPERATOR_ACCESS_CODE`
-- `DATABASE_URL` and `REDIS_URL`
-- AI provider credentials or tenant-level encrypted AI configuration
-- TOS credentials when object storage is enabled
+```powershell
+docker compose config --quiet
+docker compose up -d --build
+```
 
-CI examples expect these values from secret storage. The repository contains no production values.
+完整环境需要外部 Logto、PostgreSQL、Redis、AI 服务和对象存储配置。真实配置只能放在本地环境或 CI/CD Secret 中，不能提交到 Git。
 
-## Current Scope and Limitations
+## 配置与密钥
 
-- The main production-shaped workflow is `Project -> Brief -> Task`.
-- A legacy standalone video review model remains in the backend for compatibility.
-- AI quality depends on the configured provider and the quality of Brief/rule data.
-- Local development can use the built-in async fallback; production should run the Celery workers.
-- The repository is intended to demonstrate engineering and product architecture, not to provide a public production deployment.
+常用配置包括：
 
-## Portfolio
+- `LOGTO_ENDPOINT`、`LOGTO_APP_ID`、`LOGTO_APP_SECRET`、`LOGTO_COOKIE_SECRET`
+- `LOGTO_API_RESOURCE`、`SECRET_KEY`、`OPERATOR_ACCESS_CODE`
+- `DATABASE_URL`、`REDIS_URL`
+- `AI_PROVIDER`、`AI_API_KEY`、`AI_API_BASE_URL`
+- `TOS_ACCESS_KEY_ID`、`TOS_SECRET_ACCESS_KEY`、`TOS_BUCKET_NAME`
 
-Repository: [github.com/PLKJ666/contentguard-ai](https://github.com/PLKJ666/contentguard-ai)
+运营角色的 `OPERATOR_ACCESS_CODE` 默认为空。未显式配置时，运营人员 onboarding 会被拒绝，这是公开环境的安全默认行为。
 
-The project demonstrates multi-role workflow design, tenant-scoped configuration, asynchronous media processing, structured AI output handling, human-in-the-loop review, and an independent batch content-generation workflow.
+## 当前验证
 
+- 后端目标测试：142/142 通过
+- 后端完整测试：518 通过，2 个 Celery worker 用例在全量顺序下存在环境敏感超时，隔离运行通过
+- 前端身份相关测试：45/45 通过
+- 前端 lint、TypeScript 类型检查和生产构建：通过
+- 公开信息扫描：无旧项目标识、私有 IP 和明文密钥
+
+详细记录见 [ECC_AUDIT_REPORT.md](ECC_AUDIT_REPORT.md)。
+
+## 当前范围与限制
+
+- AI 审核质量取决于配置的模型服务和 Brief/规则数据质量。
+- 本地开发可以使用 asyncio 回退，生产环境建议运行 Celery worker。
+- Logto、AI、TOS、PostgreSQL 和 Redis 是外部依赖，不包含在公开仓库中。
+- 历史规划文档可能包含早期方案，当前行为以源码、测试和本 README 为准。
+- 本项目用于展示产品建模、权限边界、异步媒体处理和人机协同审核设计，不提供开箱即用的生产账号或生产数据。
+
+## 作品集说明
+
+项目地址：[github.com/PLKJ666/contentguard-ai](https://github.com/PLKJ666/contentguard-ai)
+
+本项目重点展示：
+
+- 多角色内容交付流程设计
+- Project、Brief、Task 领域模型
+- 租户级 AI 配置和权限隔离
+- 脚本与视频的分阶段审核状态机
+- Celery/Redis 异步任务和 SSE 实时进度
+- 人工复核、申诉、强制通过和审计日志
+- 小红书批量改写、校验、重试和导出能力
