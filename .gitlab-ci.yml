@@ -1,0 +1,94 @@
+stages:
+  - lint
+  - test
+  - build
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  NPM_CONFIG_CACHE: "$CI_PROJECT_DIR/.cache/npm"
+
+# ─── Backend Jobs ────────────────────────────────────────────────
+
+backend-lint:
+  stage: lint
+  image: python:3.12-slim
+  only:
+    - main
+    - merge_requests
+  cache:
+    key: backend-pip
+    paths:
+      - .cache/pip
+  script:
+    - cd backend
+    - python3 -c "
+      import ast, sys, pathlib;
+      ok = True;
+      for p in sorted(pathlib.Path('.').rglob('*.py')):
+          try:
+              ast.parse(p.read_text());
+          except SyntaxError as e:
+              print(f'SyntaxError in {p}\u003a {e}');
+              ok = False;
+      if not ok:
+          sys.exit(1);
+      print(f'All {len(list(pathlib.Path(\".\").rglob(\"*.py\")))} Python files passed syntax check')
+      "
+
+backend-test:
+  stage: test
+  image: python:3.12-slim
+  only:
+    - main
+    - merge_requests
+  cache:
+    key: backend-pip
+    paths:
+      - .cache/pip
+  variables:
+    DATABASE_URL: "sqlite+aiosqlite:///./test.db"
+    SECRET_KEY: "test-only-placeholder"
+  script:
+    - cd backend
+    - pip install -e ".[dev]" aiosqlite "bcrypt<5" --quiet
+    - pytest tests/ -x -q --tb=short
+
+# ─── Frontend Jobs ───────────────────────────────────────────────
+
+.frontend-base:
+  image: node:20-slim
+  only:
+    - main
+    - merge_requests
+  cache:
+    key: frontend-npm
+    paths:
+      - .cache/npm
+      - frontend/node_modules
+  before_script:
+    - cd frontend
+    - npm ci --prefer-offline
+
+frontend-lint:
+  extends: .frontend-base
+  stage: lint
+  script:
+    - npm run lint
+
+frontend-typecheck:
+  extends: .frontend-base
+  stage: lint
+  script:
+    - npx tsc --noEmit
+
+frontend-test:
+  extends: .frontend-base
+  stage: test
+  script:
+    - npm test -- --run
+
+frontend-build:
+  extends: .frontend-base
+  stage: build
+  script:
+    - npm run build

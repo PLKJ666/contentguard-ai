@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>内容卫士 AI 审核平台 · AI 服务配置（说明版）</title>
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --panel: #141621;
+      --panel-2: #1b1e2b;
+      --text: #eef1f6;
+      --muted: #9aa3b2;
+      --accent: #4ea1ff;
+      --ok: #34c759;
+      --warn: #ff9f0a;
+      --danger: #ff453a;
+      --chip: #23283a;
+      --border: #2a2f43;
+      --glow: rgba(78,161,255,0.25);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1a2140 0%, transparent 60%),
+                  radial-gradient(900px 500px at 110% 10%, #1b2a32 0%, transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+    .wrap { max-width: 1100px; margin: 32px auto; padding: 0 20px 48px; }
+    .header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+    }
+    .title { font-size: 24px; font-weight: 700; letter-spacing: 0.2px; }
+    .badge {
+      padding: 6px 10px; border-radius: 999px; background: #1f2b3d; color: #b7d4ff; font-size: 12px;
+      border: 1px solid #2d3d56;
+    }
+    .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; }
+    .card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .card h3 { margin: 0 0 10px; font-size: 15px; color: #d7deea; }
+    .row { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+    .label { color: var(--muted); font-size: 12px; min-width: 120px; }
+    .value { font-size: 14px; }
+    .chip { background: var(--chip); border: 1px solid var(--border); padding: 4px 8px; border-radius: 10px; font-size: 12px; }
+    .pill-ok { color: var(--ok); border-color: rgba(52,199,89,0.3); }
+    .pill-warn { color: var(--warn); border-color: rgba(255,159,10,0.3); }
+    .pill-danger { color: var(--danger); border-color: rgba(255,69,58,0.3); }
+    .divider { height: 1px; background: var(--border); margin: 12px 0; }
+    .cta {
+      background: var(--accent); color: #08111d; font-weight: 600; border: 0; border-radius: 10px;
+      padding: 10px 14px; box-shadow: 0 0 0 6px var(--glow);
+    }
+    .muted { color: var(--muted); font-size: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .list { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+    .tag { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 8px; background: #1c2436; border: 1px solid #2a3350; color: #cdd6e5; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="title">AI 服务配置 · 品牌方管理员</div>
+      <div class="badge">权限：仅品牌管理员可见（代理商/达人不可见）</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>1) 选择服务商（支持中转）</h3>
+        <div class="row">
+          <div class="label">AI 提供商</div>
+          <div class="value chip">OneAPI / OpenRouter</div>
+          <div class="value chip">OpenAI / Anthropic / DeepSeek / 豆包 / Qwen</div>
+        </div>
+        <div class="row">
+          <div class="label">Base URL</div>
+          <div class="value mono">https://ai.example.com/v1</div>
+        </div>
+        <div class="row">
+          <div class="label">API Key</div>
+          <div class="value mono">sk-****...****</div>
+        </div>
+        <div class="muted">说明：生产环境允许海外厂商，但需满足数据合规与客户授权。</div>
+      </div>
+
+      <div class="card">
+        <h3>2) 选择模型（文本 / 视觉 / 音频）</h3>
+        <div class="row">
+          <div class="label">文本模型</div>
+          <div class="value chip">claude-opus-4-5-20251101</div>
+        </div>
+        <div class="row">
+          <div class="label">视觉模型</div>
+          <div class="value chip">gpt-4o</div>
+          <span class="tag">多模态模型可同时出现在 text/vision 列表</span>
+        </div>
+        <div class="row">
+          <div class="label">音频模型</div>
+          <div class="value chip">whisper-large-v3</div>
+        </div>
+        <div class="muted">注：视觉模型用于画面语义/场景风险；竞品 Logo 检测由内置 CV 模型处理。</div>
+      </div>
+
+      <div class="card">
+        <h3>3) 连通性测试</h3>
+        <div class="row">
+          <div class="label">文本</div>
+          <div class="chip pill-ok">✓ 成功 342ms</div>
+        </div>
+        <div class="row">
+          <div class="label">视觉</div>
+          <div class="chip pill-ok">✓ 成功 528ms</div>
+        </div>
+        <div class="row">
+          <div class="label">音频</div>
+          <div class="chip pill-ok">✓ 成功 215ms</div>
+        </div>
+        <div class="divider"></div>
+        <button class="cta">保存并启用</button>
+        <div class="muted">保存后立即生效，无需重启。</div>
+      </div>
+
+      <div class="card">
+        <h3>4) 核心约束与状态</h3>
+        <ul class="list">
+          <li>未配置时：所有 AI 调用阻断，提示品牌方完成配置</li>
+          <li>多租户隔离：品牌方配置互不影响</li>
+          <li>API Key 加密：AES-256-GCM 存储</li>
+          <li>模型列表获取：前端调用 <span class="mono">/api/v1/ai-config/models</span>（后端代理厂商 <span class="mono">/v1/models</span>）</li>
+          <li>代理商/达人：继承配置但不可见</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

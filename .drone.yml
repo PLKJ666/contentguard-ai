@@ -1,0 +1,182 @@
+kind: pipeline
+type: docker
+name: contentguard-deploy
+
+# ─── 触发条件: tag 推送 ───
+# Tag 格式: v{major}.{minor}.{MMDD}.{build}
+#   major.minor — 语义版本号, 如 1.1
+#   MMDD        — 发布日期(月日), 如 0227
+#   build       — 当天构建序号, 从 1 递增
+# 示例: v1.1.0227.15
+trigger:
+  event:
+    - tag
+
+# ─── 需要 Trusted 模式（docker:27-cli 方案） ───
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+
+steps:
+  # ─── Step 0: 校验 tag 格式 ───
+  - name: validate-tag
+    image: alpine:3
+    commands:
+      - |
+        TAG="${DRONE_TAG}"
+        echo "校验 tag 格式: $TAG"
+        echo "$TAG" | grep -qE '^v[0-9]+\.[0-9]+\.(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\.[0-9]+$'
+        if [ $? -ne 0 ]; then
+          echo "ERROR: tag 格式不合法！"
+          echo "要求: v{major}.{minor}.{MMDD}.{build}"
+          echo "示例: v1.1.0227.1"
+          exit 1
+        fi
+        echo "tag 格式校验通过: $TAG"
+
+  # ─── Step 1: 构建后端镜像 ───
+  - name: build-backend
+    depends_on:
+      - validate-tag
+    image: docker:27-cli
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    environment:
+      IMAGE_REPO:
+        from_secret: backend_repo
+      REGISTRY_PREFIX:
+        from_secret: registry_prefix
+      DOCKER_BUILDKIT: "1"
+    commands:
+      - echo "=== 构建后端镜像 ==="
+      - export IMAGE_REPO=$(echo "$IMAGE_REPO" | tr -d '[:space:]')
+      - export DEPS_CACHE_REPO="$${IMAGE_REPO}:deps-cache"
+      - export APT_MIRROR="${APT_MIRROR:-}"
+      - export PYPI_INDEX_URL="${PYPI_INDEX_URL:-}"
+      - docker pull "$DEPS_CACHE_REPO" || true
+      - docker build --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from "$DEPS_CACHE_REPO" --build-arg REGISTRY="$REGISTRY_PREFIX" --build-arg APT_MIRROR="$APT_MIRROR" --build-arg PYPI_INDEX_URL="$PYPI_INDEX_URL" --target deps -t "$DEPS_CACHE_REPO" ./backend
+      - docker push "$DEPS_CACHE_REPO"
+      - docker pull "$IMAGE_REPO:latest" || true
+      - docker build --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from "$IMAGE_REPO:latest" --cache-from "$DEPS_CACHE_REPO" --build-arg REGISTRY="$REGISTRY_PREFIX" --build-arg APT_MIRROR="$APT_MIRROR" --build-arg PYPI_INDEX_URL="$PYPI_INDEX_URL" -t "$IMAGE_REPO:${DRONE_TAG:-latest}" -t "$IMAGE_REPO:latest" ./backend
+      - docker push "$IMAGE_REPO:${DRONE_TAG:-latest}"
+      - docker push "$IMAGE_REPO:latest"
+      - echo "后端镜像推送成功"
+
+  # ─── Step 2: 构建前端镜像 ───
+  - name: build-frontend
+    depends_on:
+      - validate-tag
+    image: docker:27-cli
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    environment:
+      IMAGE_REPO:
+        from_secret: frontend_repo
+      REGISTRY_PREFIX:
+        from_secret: registry_prefix
+      NEXT_PUBLIC_BASE_URL:
+        from_secret: public_base_url
+      LOGTO_ENDPOINT:
+        from_secret: logto_endpoint
+      LOGTO_APP_ID:
+        from_secret: logto_app_id
+      LOGTO_APP_SECRET:
+        from_secret: logto_app_secret
+      LOGTO_COOKIE_SECRET:
+        from_secret: logto_cookie_secret
+      LOGTO_API_RESOURCE:
+        from_secret: logto_api_resource
+      DOCKER_BUILDKIT: "1"
+    commands:
+      - echo "=== 构建前端镜像 ==="
+      - export IMAGE_REPO=$(echo "$IMAGE_REPO" | tr -d '[:space:]')
+      - export DEPS_CACHE_REPO="$${IMAGE_REPO}:deps-cache"
+      - test -n "$NEXT_PUBLIC_BASE_URL" || { echo "Missing Drone secret: public_base_url"; exit 1; }
+      - test -n "$LOGTO_ENDPOINT" || { echo "Missing Drone secret: logto_endpoint"; exit 1; }
+      - test -n "$LOGTO_APP_ID" || { echo "Missing Drone secret: logto_app_id"; exit 1; }
+      - test -n "$LOGTO_APP_SECRET" || { echo "Missing Drone secret: logto_app_secret"; exit 1; }
+      - test -n "$LOGTO_COOKIE_SECRET" || { echo "Missing Drone secret: logto_cookie_secret"; exit 1; }
+      - test -n "$LOGTO_API_RESOURCE" || { echo "Missing Drone secret: logto_api_resource"; exit 1; }
+      - docker pull "$DEPS_CACHE_REPO" || true
+      - docker build --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from "$DEPS_CACHE_REPO" --build-arg REGISTRY="$REGISTRY_PREFIX" --target deps -t "$DEPS_CACHE_REPO" ./frontend
+      - docker push "$DEPS_CACHE_REPO"
+      - docker pull "$IMAGE_REPO:latest" || true
+      - docker build --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from "$IMAGE_REPO:latest" --cache-from "$DEPS_CACHE_REPO" --build-arg REGISTRY="$REGISTRY_PREFIX" --build-arg NEXT_PUBLIC_API_BASE_URL=/api/v1 --build-arg NEXT_PUBLIC_USE_MOCK=false --build-arg NEXT_PUBLIC_BASE_URL="$NEXT_PUBLIC_BASE_URL" --build-arg LOGTO_ENDPOINT="$LOGTO_ENDPOINT" --build-arg LOGTO_APP_ID="$LOGTO_APP_ID" --build-arg LOGTO_APP_SECRET="$LOGTO_APP_SECRET" --build-arg LOGTO_COOKIE_SECRET="$LOGTO_COOKIE_SECRET" --build-arg LOGTO_API_RESOURCE="$LOGTO_API_RESOURCE" -t "$IMAGE_REPO:${DRONE_TAG:-latest}" -t "$IMAGE_REPO:latest" ./frontend
+      - docker push "$IMAGE_REPO:${DRONE_TAG:-latest}"
+      - docker push "$IMAGE_REPO:latest"
+      - echo "前端镜像推送成功"
+
+  # ─── Step 3: SSH 部署到生产服务器 ───
+  # 前提：远程服务器已将仓库检出到 /opt/contentguard-ai
+  - name: deploy
+    image: appleboy/drone-ssh:1
+    pull: if-not-exists
+    settings:
+      host:
+        from_secret: deploy_host
+      username:
+        from_secret: deploy_user
+      key:
+        from_secret: deploy_ssh_key
+      port: 22
+      command_timeout: 30m
+      script:
+        - export DEPLOY_DIR=/opt/contentguard-ai
+        - export DOCKER_REGISTRY="${DOCKER_REGISTRY:-registry.example.com}"
+        - git config --global --add safe.directory "$DEPLOY_DIR"
+        - cd "$DEPLOY_DIR"
+        - git pull --ff-only origin main
+        - echo "=== 开始部署 ==="
+        - bash scripts/deploy-remote.sh "${DRONE_TAG:-latest}"
+    depends_on:
+      - build-backend
+      - build-frontend
+
+  # ─── Step 4: 部署成功通知 ───
+  - name: notify-success
+    image: curlimages/curl:8.10.1
+    pull: if-not-exists
+    environment:
+      WEBHOOK_URL:
+        from_secret: notification_webhook
+    commands:
+      - |
+        if [ -n "$WEBHOOK_URL" ]; then
+          COMMIT_MSG=$(printf '%s' "$DRONE_COMMIT_MESSAGE" | tr '\n' ' ' | sed 's/\\/\\\\/g; s/"/\\"/g')
+          CONTENT=$(printf 'ContentGuard AI deployment succeeded\\n版本: %s\\n构建: #%s\\n提交: %s' "$DRONE_TAG" "$DRONE_BUILD_NUMBER" "$COMMIT_MSG")
+          PAYLOAD=$(printf '{"msgtype":"text","text":{"content":"%s"}}' "$CONTENT")
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"
+        fi
+    depends_on:
+      - deploy
+    when:
+      status:
+        - success
+
+  # ─── Step 5: 部署失败通知 ───
+  - name: notify-failure
+    image: curlimages/curl:8.10.1
+    pull: if-not-exists
+    environment:
+      WEBHOOK_URL:
+        from_secret: notification_webhook
+    commands:
+      - |
+        if [ -n "$WEBHOOK_URL" ]; then
+          BUILD_LINK=$(printf '%s' "$DRONE_BUILD_LINK" | sed 's/\\/\\\\/g; s/"/\\"/g')
+          CONTENT=$(printf 'ContentGuard AI deployment failed\\n版本: %s\\n构建: #%s\\n请查看: %s' "$DRONE_TAG" "$DRONE_BUILD_NUMBER" "$BUILD_LINK")
+          PAYLOAD=$(printf '{"msgtype":"text","text":{"content":"%s"}}' "$CONTENT")
+          curl -s -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"
+        fi
+    depends_on:
+      - deploy
+    when:
+      status:
+        - failure

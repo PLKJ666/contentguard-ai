@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# Dependencies (will be installed in Docker)
+node_modules
+
+# Build output
+.next
+out
+dist
+
+# Testing
+coverage
+.vitest
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Misc
+*.log
+*.tmp
+README.md
+Dockerfile
+.dockerignore
+._*
+.DS_Store

@@ -1,0 +1,71 @@
+services:
+  # ---- FastAPI 后端 ----
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contentguard-backend
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://postgres:postgres@host.docker.internal:5432/contentguard}
+      REDIS_URL: ${REDIS_URL:-redis://host.docker.internal:6379/0}
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    volumes:
+      - video_temp:/tmp/videos
+    restart: unless-stopped
+
+  # ---- Next.js 前端 ----
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # 直连 Next(:3000) 时也保持与生产一致：浏览器永远请求同域 /api/v1
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-/api/v1}
+        NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost}
+        API_REWRITE_TARGET: http://backend:8000
+        LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+        LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+        LOGTO_APP_SECRET: ${LOGTO_APP_SECRET:-}
+        LOGTO_COOKIE_SECRET: ${LOGTO_COOKIE_SECRET:-}
+        LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    container_name: contentguard-frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      API_REWRITE_TARGET: http://backend:8000
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-/api/v1}
+      NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost}
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_APP_SECRET: ${LOGTO_APP_SECRET:-}
+      LOGTO_COOKIE_SECRET: ${LOGTO_COOKIE_SECRET:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    volumes:
+      - ./frontend/data/changelog.json:/app/public/data/changelog.json:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ---- Nginx 反向代理 ----
+  nginx:
+    image: nginx:alpine
+    container_name: contentguard-nginx
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+volumes:
+  video_temp:

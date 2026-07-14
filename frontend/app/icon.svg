@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="tile" x1="48" y1="40" x2="196" y2="212" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#090D16" />
+      <stop offset="0.58" stop-color="#11172B" />
+      <stop offset="1" stop-color="#18305E" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(98 176) rotate(-33) scale(118 92)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4F7DFF" stop-opacity="0.95" />
+      <stop offset="0.52" stop-color="#2E63FF" stop-opacity="0.42" />
+      <stop offset="1" stop-color="#2E63FF" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="shine" x1="92" y1="64" x2="168" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+    <filter id="outerGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#346CFF" flood-opacity="0.32" />
+    </filter>
+  </defs>
+
+  <rect width="256" height="256" rx="64" fill="#05070B" />
+  <g filter="url(#outerGlow)">
+    <rect x="36" y="36" width="184" height="184" rx="52" fill="url(#tile)" stroke="#28416E" stroke-width="2.5" />
+    <rect x="36" y="36" width="184" height="184" rx="52" fill="url(#glow)" />
+    <path
+      d="M128 58c16.6 12.3 35.4 19 56.4 20.2v42.5c0 40-20.5 72.8-56.4 96.3-35.9-23.5-56.4-56.3-56.4-96.3V78.2C92.6 77 111.4 70.3 128 58Z"
+      fill="#EFF4FF"
+    />
+    <path
+      d="M128 70.4c13.4 8.9 29 14.4 46.9 16.2v32.2c0 31.8-15.8 58.8-46.9 79-31.1-20.2-46.9-47.2-46.9-79V86.6c17.9-1.8 33.5-7.3 46.9-16.2Z"
+      fill="url(#shine)"
+    />
+    <path
+      d="M97 132.5l16.6 16.6L159 103.8"
+      fill="none"
+      stroke="#6EA8FF"
+      stroke-width="13"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>

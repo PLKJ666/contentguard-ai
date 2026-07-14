@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.coverage
+htmlcov/
+.pytest_cache/
+*.egg-info/
+.eggs/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Test coverage
+coverage/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+.codex-tmp/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database data
+backend/data/
+
+# Virtual environment
+venv/
+
+# Logs
+*.log
+npm-debug.log*
+
+# SSL certificates
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.crt
+
+# Docker volumes data
+postgres_data/
+redis_data/
+
+# CI/CD 参考文档（其他项目的）
+cicd_integration_updated.md
+cicd_troubleshooting.md
+drone_cicd_deployment_guide.md
+
+# Portfolio publication excludes local/private design source and screenshots.
+pencil-new.pen
+docs/images/

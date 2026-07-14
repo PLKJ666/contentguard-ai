@@ -1,0 +1,203 @@
+name: contentguard-localprod
+
+services:
+  # ---- PostgreSQL ----
+  postgres:
+    image: postgres:16-alpine
+    container_name: contentguard-postgres-local
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-contentguard}
+    volumes:
+      - postgres_data_local:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- Redis ----
+  redis:
+    image: redis:7-alpine
+    container_name: contentguard-redis-local
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data_local:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---- FastAPI 后端 ----
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contentguard-backend-local
+    env_file:
+      - ./backend/.env
+    environment:
+      DEBUG: ${DEBUG:-false}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      USE_CELERY: ${USE_CELERY:-true}
+      LOCAL_FILE_STORAGE_ENABLED: ${LOCAL_FILE_STORAGE_ENABLED:-true}
+      LOCAL_FILE_STORAGE_DIR: /app/local_uploads
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-contentguard}
+      REDIS_URL: redis://redis:6379/0
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    volumes:
+      - video_temp_local:/tmp/videos
+      - local_uploads_local:/app/local_uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ---- Celery Worker ----
+  celery-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contentguard-celery-worker-local
+    env_file:
+      - ./backend/.env
+    environment:
+      DEBUG: ${DEBUG:-false}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      USE_CELERY: ${USE_CELERY:-true}
+      LOCAL_FILE_STORAGE_ENABLED: ${LOCAL_FILE_STORAGE_ENABLED:-true}
+      LOCAL_FILE_STORAGE_DIR: /app/local_uploads
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-contentguard}
+      REDIS_URL: redis://redis:6379/0
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    volumes:
+      - video_temp_local:/tmp/videos
+      - local_uploads_local:/app/local_uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    entrypoint: []
+    command: celery -A app.celery_app worker --loglevel=info --concurrency=${CELERY_WORKER_CONCURRENCY:-2} -Q default,review
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+
+  celery-xhs-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contentguard-celery-xhs-worker-local
+    env_file:
+      - ./backend/.env
+    environment:
+      DEBUG: ${DEBUG:-false}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      USE_CELERY: ${USE_CELERY:-true}
+      LOCAL_FILE_STORAGE_ENABLED: ${LOCAL_FILE_STORAGE_ENABLED:-true}
+      LOCAL_FILE_STORAGE_DIR: /app/local_uploads
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-contentguard}
+      REDIS_URL: redis://redis:6379/0
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+      XHS_BATCH_PARALLELISM: ${XHS_BATCH_PARALLELISM:-4}
+    volumes:
+      - video_temp_local:/tmp/videos
+      - local_uploads_local:/app/local_uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    entrypoint: []
+    command: celery -A app.celery_app worker --loglevel=info --concurrency=${XHS_BATCH_WORKER_CONCURRENCY:-4} -Q xhs_batch
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+
+  # ---- Celery Beat ----
+  celery-beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contentguard-celery-beat-local
+    env_file:
+      - ./backend/.env
+    environment:
+      DEBUG: ${DEBUG:-false}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      USE_CELERY: ${USE_CELERY:-true}
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-contentguard}
+      REDIS_URL: redis://redis:6379/0
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+    entrypoint: []
+    command: celery -A app.celery_app beat --loglevel=info
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+
+  # ---- Next.js 前端 ----
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-/api/v1}
+        NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
+        API_REWRITE_TARGET: http://backend:8000
+        LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+        LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+        LOGTO_APP_SECRET: ${LOGTO_APP_SECRET:-}
+        LOGTO_COOKIE_SECRET: ${LOGTO_COOKIE_SECRET:-}
+        LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    container_name: contentguard-frontend-local
+    environment:
+      NODE_ENV: production
+      API_REWRITE_TARGET: http://backend:8000
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-/api/v1}
+      NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
+      LOGTO_ENDPOINT: ${LOGTO_ENDPOINT:-}
+      LOGTO_APP_ID: ${LOGTO_APP_ID:-}
+      LOGTO_APP_SECRET: ${LOGTO_APP_SECRET:-}
+      LOGTO_COOKIE_SECRET: ${LOGTO_COOKIE_SECRET:-}
+      LOGTO_API_RESOURCE: ${LOGTO_API_RESOURCE:-}
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ---- Nginx ----
+  nginx:
+    image: nginx:alpine
+    container_name: contentguard-nginx-local
+    ports:
+      - "${LOCAL_PROD_NGINX_PORT:-3000}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data_local:
+  redis_data_local:
+  video_temp_local:
+  local_uploads_local:

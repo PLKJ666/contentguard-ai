@@ -1,0 +1,87 @@
+[project]
+name = "contentguard-backend"
+version = "1.0.0"
+description = "ContentGuard AI backend service"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "celery>=5.3.0",
+    "redis>=5.0.0",
+    "sqlalchemy>=2.0.0",
+    "asyncpg>=0.29.0",
+    "greenlet>=3.0.0",
+    "httpx>=0.26.0",
+    "pydantic[email]>=2.5.0",
+    "pydantic-settings>=2.0.0",
+    "PyJWT>=2.8.0",
+    "passlib>=1.7.4",
+    "bcrypt==4.0.1",
+    "alembic>=1.13.0",
+    "cryptography>=42.0.0",
+    "openai>=1.12.0",
+    "cachetools>=5.3.0",
+    "sse-starlette>=2.0.0",
+    "pdfplumber>=0.10.0",
+    "python-docx>=1.1.0",
+    "openpyxl>=3.1.0",
+    "PyMuPDF>=1.24.0",
+    "tos>=2.7.0",
+    "socksio>=1.0.0",
+    "aiofiles>=23.0.0",
+    "python-multipart>=0.0.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.26.0",
+    "testcontainers>=3.7.0",
+    "factory-boy>=3.3.0",
+    "faker>=22.0.0",
+    "respx>=0.20.0",
+    "aiosqlite>=0.19.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "e2e: marks tests as end-to-end tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::jwt.warnings.InsecureKeyLengthWarning",
+]
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+omit = [
+    "*/migrations/*",
+    "*/__init__.py",
+    "*/tests/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]

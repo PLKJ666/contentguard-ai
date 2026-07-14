@@ -1,0 +1,1686 @@
+{
+  "generatedAt": "2026-04-21T12:01:50.904Z",
+  "grouping": "tagged",
+  "versions": [
+    {
+      "id": "v1.1.0421.2",
+      "title": "v1.1.0421.2",
+      "tag": "v1.1.0421.2",
+      "date": "2026-04-21",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "complete self-serve workflow and creator guidance board",
+          "hash": "eba90e4",
+          "date": "2026-04-21"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0417.3",
+      "title": "v1.1.0417.3",
+      "tag": "v1.1.0417.3",
+      "date": "2026-04-21",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "stabilize login, brief save, and guidance export",
+          "hash": "8c113c0",
+          "date": "2026-04-21"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0421.1",
+      "title": "v1.1.0421.1",
+      "tag": "v1.1.0421.1",
+      "date": "2026-04-21",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "stabilize login, brief save, and guidance export",
+          "hash": "ed2fd21",
+          "date": "2026-04-21"
+        },
+        {
+          "type": "fix",
+          "message": "align brief flow and learning scope",
+          "hash": "84b1f19",
+          "date": "2026-04-17"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0417.2",
+      "title": "v1.1.0417.2",
+      "tag": "v1.1.0417.2",
+      "date": "2026-04-17",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "恢复统一登录入口并兼容新用户角色补全",
+          "hash": "2db7518",
+          "date": "2026-04-17"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0417.1",
+      "title": "v1.1.0417.1",
+      "tag": "v1.1.0417.1",
+      "date": "2026-04-17",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "restore native upload submit fallback",
+          "hash": "7718bb7",
+          "date": "2026-04-17"
+        },
+        {
+          "type": "feat",
+          "message": "add workspace flow and gated onboarding",
+          "hash": "a9f6805",
+          "date": "2026-04-16"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0416.1",
+      "title": "v1.1.0416.1",
+      "tag": "v1.1.0416.1",
+      "date": "2026-04-16",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "add creator guidance board audio review",
+          "hash": "0c32b30",
+          "date": "2026-04-16"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.12",
+      "title": "v1.1.0410.12",
+      "tag": "v1.1.0410.12",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "restore safari native upload flow from v1.1.0407.8",
+          "hash": "7bedc8f",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.11",
+      "title": "v1.1.0410.11",
+      "tag": "v1.1.0410.11",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "force local upload storage in production",
+          "hash": "7c816f4",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.10",
+      "title": "v1.1.0410.10",
+      "tag": "v1.1.0410.10",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "enable local upload fallback when TOS is unavailable",
+          "hash": "e3a03c8",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.9",
+      "title": "v1.1.0410.9",
+      "tag": "v1.1.0410.9",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "restore native video submit and creator back navigation",
+          "hash": "4a80a82",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.8",
+      "title": "v1.1.0410.8",
+      "tag": "v1.1.0410.8",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复 Safari 原生上传页依赖 TOS 配置",
+          "hash": "6762ea7",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.7",
+      "title": "v1.1.0410.7",
+      "tag": "v1.1.0410.7",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "强制退出后重新认证",
+          "hash": "f1e039b",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.6",
+      "title": "v1.1.0410.6",
+      "tag": "v1.1.0410.6",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复更新日志对 scoped commit 的识别",
+          "hash": "bbbe7eb",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0410.5",
+      "title": "v1.1.0410.5",
+      "tag": "v1.1.0410.5",
+      "date": "2026-04-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "恢复站点 favicon 图标",
+          "hash": "94b6565",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.11",
+      "title": "v1.1.0407.11",
+      "tag": "v1.1.0407.11",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复生产登录因外部数据库切换导致的失败",
+          "hash": "99aa72d",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.10",
+      "title": "v1.1.0407.10",
+      "tag": "v1.1.0407.10",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "优化后端镜像构建缓存与镜像源",
+          "hash": "155aab7",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.7",
+      "title": "v1.1.0407.7",
+      "tag": "v1.1.0407.7",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "加固小红书批处理恢复并拆分独立 worker 部署",
+          "hash": "5d66ea8",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.6",
+      "title": "v1.1.0407.6",
+      "tag": "v1.1.0407.6",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "清理旧本地认证残留并统一切到 Logto",
+          "hash": "2a9c173",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.5",
+      "title": "v1.1.0407.5",
+      "tag": "v1.1.0407.5",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "收口配置页状态并补稳定性测试",
+          "hash": "30263e1",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.4",
+      "title": "v1.1.0407.4",
+      "tag": "v1.1.0407.4",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "补齐 Brief 与上传修复回归测试",
+          "hash": "89e68b6",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.3",
+      "title": "v1.1.0407.3",
+      "tag": "v1.1.0407.3",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "补齐任务名展示与历史消息迁移",
+          "hash": "f9ced1c",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.2",
+      "title": "v1.1.0407.2",
+      "tag": "v1.1.0407.2",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "补齐视频下载与 Brief 解析链路修复",
+          "hash": "564755f",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0407.1",
+      "title": "v1.1.0407.1",
+      "tag": "v1.1.0407.1",
+      "date": "2026-04-07",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "stabilize video upload and deploy parity",
+          "hash": "1cc391c",
+          "date": "2026-04-07"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0331.2",
+      "title": "v1.1.0331.2",
+      "tag": "v1.1.0331.2",
+      "date": "2026-03-31",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "恢复审核洞察并修复任务名与卖点展示",
+          "hash": "abc2094",
+          "date": "2026-03-31"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0331.1",
+      "title": "v1.1.0331.1",
+      "tag": "v1.1.0331.1",
+      "date": "2026-03-31",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复视频代理上传超时",
+          "hash": "9d58e03",
+          "date": "2026-03-31"
+        },
+        {
+          "type": "fix",
+          "message": "邀请关系改为确认后生效",
+          "hash": "2ea2fa7",
+          "date": "2026-03-31"
+        },
+        {
+          "type": "fix",
+          "message": "修复前端重建后的 Docker 上游解析",
+          "hash": "ffbe2f9",
+          "date": "2026-03-31"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.8",
+      "title": "v1.1.0327.8",
+      "tag": "v1.1.0327.8",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "保留旧版站点图标并恢复认证部署链路",
+          "hash": "3f516bc",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.7",
+      "title": "v1.1.0327.7",
+      "tag": "v1.1.0327.7",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "回退站点图标与认证部署链路到 v1.1.0324.2 基线",
+          "hash": "537d137",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.6",
+      "title": "v1.1.0327.6",
+      "tag": "v1.1.0327.6",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "避免生产编排覆盖前端 Logto 认证配置",
+          "hash": "1d7ce0f",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.5",
+      "title": "v1.1.0327.5",
+      "tag": "v1.1.0327.5",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复生产域名下 Logto 认证路由 500",
+          "hash": "7e19ec2",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.4",
+      "title": "v1.1.0327.4",
+      "tag": "v1.1.0327.4",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "增加前端依赖安装的 npm 源超时兜底",
+          "hash": "c8a8d7c",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.3",
+      "title": "v1.1.0327.3",
+      "tag": "v1.1.0327.3",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修正 Drone 前端缓存镜像变量展开",
+          "hash": "655b55c",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.2",
+      "title": "v1.1.0327.2",
+      "tag": "v1.1.0327.2",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "避免认证配置缺失导致前端整体 500",
+          "hash": "9c17f9d",
+          "date": "2026-03-27"
+        },
+        {
+          "type": "perf",
+          "message": "复用前端镜像依赖缓存缩短构建时间",
+          "hash": "1f0e1db",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0327.1",
+      "title": "v1.1.0327.1",
+      "tag": "v1.1.0327.1",
+      "date": "2026-03-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "恢复站内品牌标为原始红色图标",
+          "hash": "0af4a64",
+          "date": "2026-03-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0324.4",
+      "title": "v1.1.0324.4",
+      "tag": "v1.1.0324.4",
+      "date": "2026-03-24",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复更新日志与品牌图标缓存不刷新的问题",
+          "hash": "090aea2",
+          "date": "2026-03-24"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0324.3",
+      "title": "v1.1.0324.3",
+      "tag": "v1.1.0324.3",
+      "date": "2026-03-24",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "统一网站图标与站内品牌标识",
+          "hash": "1a555b6",
+          "date": "2026-03-24"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0324.2",
+      "title": "v1.1.0324.2",
+      "tag": "v1.1.0324.2",
+      "date": "2026-03-24",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复带括号提交信息触发的部署通知脚本报错",
+          "hash": "ebf2d1c",
+          "date": "2026-03-24"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0324.1",
+      "title": "v1.1.0324.1",
+      "tag": "v1.1.0324.1",
+      "date": "2026-03-24",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "preserve proxy upload filenames in preview and download",
+          "hash": "0c70860",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "enrich script and video reviews with exposure details",
+          "hash": "940a6b1",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "localize xhs batch detail labels",
+          "hash": "e887d05",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "add xhs variant brief parsing",
+          "hash": "d630639",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "restore xhs brief parsing in local docker",
+          "hash": "874ef1d",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "add xhs project brief parsing",
+          "hash": "d248bf5",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "improve xhs category selection",
+          "hash": "e9378f3",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "add xhs project hierarchy",
+          "hash": "1a252ca",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "remove asr from agency xhs ai config",
+          "hash": "ca66b3c",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "restore xhs primary models in agency ai config",
+          "hash": "f99a29e",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "simplify agency xhs ai config",
+          "hash": "eb31039",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "add agency ai config for xhs",
+          "hash": "724f73b",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "preserve auth callback host and port",
+          "hash": "18f3393",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "fix",
+          "message": "stabilize local prod docker stack",
+          "hash": "de6998a",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "add xhs rule pack asset flow",
+          "hash": "635aa11",
+          "date": "2026-03-24"
+        },
+        {
+          "type": "feat",
+          "message": "add xhs batch notes workflow",
+          "hash": "2d64adf",
+          "date": "2026-03-19"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0317.1",
+      "title": "v1.1.0317.1",
+      "tag": "v1.1.0317.1",
+      "date": "2026-03-17",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "Logto-only auth + production healthchecks",
+          "hash": "4d814fe",
+          "date": "2026-03-17"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0313.1",
+      "title": "v1.1.0313.1",
+      "tag": "v1.1.0313.1",
+      "date": "2026-03-13",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "replace mocks with real APIs; add profile/settings/reports",
+          "hash": "537e3cc",
+          "date": "2026-03-13"
+        }
+      ]
+    },
+    {
+      "id": "1.1.0312.1",
+      "title": "1.1.0312.1",
+      "tag": "1.1.0312.1",
+      "date": "2026-03-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "improve script rewrite prompts and video preview fallback",
+          "hash": "97c41c7",
+          "date": "2026-03-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0310.2",
+      "title": "v1.1.0310.2",
+      "tag": "v1.1.0310.2",
+      "date": "2026-03-10",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "task list preload and migration idempotency",
+          "hash": "4365e0e",
+          "date": "2026-03-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0310.1",
+      "title": "v1.1.0310.1",
+      "tag": "v1.1.0310.1",
+      "date": "2026-03-10",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "brief product name and AI task updates",
+          "hash": "3f3e995",
+          "date": "2026-03-10"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.13",
+      "title": "v1.1.0306.13",
+      "tag": "v1.1.0306.13",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "兼容达人任务ID映射并修复详情404",
+          "hash": "9b96573",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.12",
+      "title": "v1.1.0306.12",
+      "tag": "v1.1.0306.12",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复达人任务列表空白与详情ID路由问题",
+          "hash": "4b245ba",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.11",
+      "title": "v1.1.0306.11",
+      "tag": "v1.1.0306.11",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "提升达人任务卡信息可读性并显示项目/品牌字段",
+          "hash": "f2cefbf",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.10",
+      "title": "v1.1.0306.10",
+      "tag": "v1.1.0306.10",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复达人任务列表跳转详情使用错误映射导致任务不存在",
+          "hash": "6dfe750",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.9",
+      "title": "v1.1.0306.9",
+      "tag": "v1.1.0306.9",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "部署强制拉取最新脚本并支持跳过 ready 检查",
+          "hash": "0aade53",
+          "date": "2026-03-06"
+        },
+        {
+          "type": "perf",
+          "message": "提升 Drone 构建缓存并优化部署耗时步骤",
+          "hash": "d1336d6",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.8",
+      "title": "v1.1.0306.8",
+      "tag": "v1.1.0306.8",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "Drone 前端构建参数改为显式字面量避免变量展开失效",
+          "hash": "339fef4",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.7",
+      "title": "v1.1.0306.7",
+      "tag": "v1.1.0306.7",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "登录回调域名强制使用 https 生成",
+          "hash": "2fda9b5",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.6",
+      "title": "v1.1.0306.6",
+      "tag": "v1.1.0306.6",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "前端镜像构建注入 Logto 与公开域名参数",
+          "hash": "6136ad4",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.5",
+      "title": "v1.1.0306.5",
+      "tag": "v1.1.0306.5",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "Logto 回调域名按请求动态解析并补齐生产前端认证环境",
+          "hash": "bb205df",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.4",
+      "title": "v1.1.0306.4",
+      "tag": "v1.1.0306.4",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "部署并发锁等待 + 按 DRONE_TAG 精确部署",
+          "hash": "a0e4160",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.3",
+      "title": "v1.1.0306.3",
+      "tag": "v1.1.0306.3",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "更新审核台与多角色UI并完善脚本改写链路",
+          "hash": "075cca9",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0306.1",
+      "title": "v1.1.0306.1",
+      "tag": "v1.1.0306.1",
+      "date": "2026-03-06",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "权限检查修复 + 文件替换计数 + 纯文本脚本支持",
+          "hash": "fec1761",
+          "date": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.22",
+      "title": "v1.1.0305.22",
+      "tag": "v1.1.0305.22",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "docs",
+          "message": "用户使用说明书 + 代理商审核工作台元描述型违规修复",
+          "hash": "a8fd432",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.21",
+      "title": "v1.1.0305.21",
+      "tag": "v1.1.0305.21",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "nginx 端口改为 8090（8080 已被占用）",
+          "hash": "ea7b3b1",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.20",
+      "title": "v1.1.0305.20",
+      "tag": "v1.1.0305.20",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "nginx 端口改为 8080 避免与 OpenResty 冲突",
+          "hash": "c958562",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.19",
+      "title": "v1.1.0305.19",
+      "tag": "v1.1.0305.19",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "deploy 脚本去掉重复数据库迁移，改为验证状态",
+          "hash": "a30bc97",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.18",
+      "title": "v1.1.0305.18",
+      "tag": "v1.1.0305.18",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "docker-compose.prod.yml 只暴露 nginx 80 端口，其余服务内网隔离",
+          "hash": "5c0f36c",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.13",
+      "title": "v1.1.0305.13",
+      "tag": "v1.1.0305.13",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "debug token",
+          "hash": "f2a3553",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.12",
+      "title": "v1.1.0305.12",
+      "tag": "v1.1.0305.12",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "use gittoken secret name",
+          "hash": "9eb0b60",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.10",
+      "title": "v1.1.0305.10",
+      "tag": "v1.1.0305.10",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "yaml syntax",
+          "hash": "ec80382",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.9",
+      "title": "v1.1.0305.9",
+      "tag": "v1.1.0305.9",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "add debug output",
+          "hash": "8331ff8",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0305.1",
+      "title": "v1.1.0305.1",
+      "tag": "v1.1.0305.1",
+      "date": "2026-03-05",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "任务命名改为项目名+序号，修复Brief解析，优化AI默认参数",
+          "hash": "8c4033e",
+          "date": "2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.19",
+      "title": "v1.1.0227.19",
+      "tag": "v1.1.0227.19",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "粘贴文字功能加到任务详情页(用户实际上传入口)",
+          "hash": "c4f5650",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.18",
+      "title": "v1.1.0227.18",
+      "tag": "v1.1.0227.18",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "后端构建加速(国内PyPI镜像) + 浏览器缓存修复",
+          "hash": "7d7a6c9",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.15",
+      "title": "v1.1.0227.15",
+      "tag": "v1.1.0227.15",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "AI 学习空响应修复 — max_tokens 扩大 + system message + 超时调优",
+          "hash": "d5f8421",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.14",
+      "title": "v1.1.0227.14",
+      "tag": "v1.1.0227.14",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "AI 学习 JSON 健壮解析 + 视频审核优化 + 代理商报表真实数据 + 申诉流程增强",
+          "hash": "8d65583",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.13",
+      "title": "v1.1.0227.13",
+      "tag": "v1.1.0227.13",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "修复退出登录失败 — 防止 AuthGuard 抢先跳转",
+          "hash": "a2c6e9d",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.12",
+      "title": "v1.1.0227.12",
+      "tag": "v1.1.0227.12",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "优化登录流程 — 移除首页角色选择、自动跳转 Logto",
+          "hash": "5273d3a",
+          "date": "2026-02-27"
+        },
+        {
+          "type": "fix",
+          "message": "changelog 支持 docs 类型 commit",
+          "hash": "5ba9fa2",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.11",
+      "title": "v1.1.0227.11",
+      "tag": "v1.1.0227.11",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "docs",
+          "message": "清理 env 模板 + 新增生产部署指南",
+          "hash": "647989d",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.10",
+      "title": "v1.1.0227.10",
+      "tag": "v1.1.0227.10",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "删除 SMTP 配置 — Logto 接管认证后不再需要邮箱验证码",
+          "hash": "29adc21",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.9",
+      "title": "v1.1.0227.9",
+      "tag": "v1.1.0227.9",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "整理 .env 配置文件 — 删除未用项、重排序、补充说明",
+          "hash": "8461a3e",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.6",
+      "title": "v1.1.0227.6",
+      "tag": "v1.1.0227.6",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "理清 .env 职责分离 — 根目录管编排，backend 管业务",
+          "hash": "a1ce563",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.5",
+      "title": "v1.1.0227.5",
+      "tag": "v1.1.0227.5",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "同步 .env.example 模板 — 补充 CORS_ORIGINS、修正 DATABASE_URL 格式",
+          "hash": "dab9264",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.4",
+      "title": "v1.1.0227.4",
+      "tag": "v1.1.0227.4",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "后端包管理切换 pip→uv，删除 requirements.lock 改用 uv.lock",
+          "hash": "8e5bfb3",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.3",
+      "title": "v1.1.0227.3",
+      "tag": "v1.1.0227.3",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "nginx 反代 Logto 认证路由到前端，修复登录回调失败",
+          "hash": "4ec5171",
+          "date": "2026-02-27"
+        },
+        {
+          "type": "fix",
+          "message": "删除 backend/nginx 旧配置，统一使用根目录 nginx/",
+          "hash": "4e37ecb",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.2",
+      "title": "v1.1.0227.2",
+      "tag": "v1.1.0227.2",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "changelog 改为运行时加载 — 挂载卷后无需重建即可更新",
+          "hash": "f80d538",
+          "date": "2026-02-27"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0227.1",
+      "title": "v1.1.0227.1",
+      "tag": "v1.1.0227.1",
+      "date": "2026-02-27",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "changelog 过滤规则移除\"部署配置\"关键词，确保部署相关更新可见",
+          "hash": "a5dc107",
+          "date": "2026-02-27"
+        },
+        {
+          "type": "fix",
+          "message": "Docker 部署配置规范化",
+          "hash": "ccdaa59",
+          "date": "2026-02-26"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0226.6",
+      "title": "v1.1.0226.6",
+      "tag": "v1.1.0226.6",
+      "date": "2026-02-26",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "changelog 过滤规则修正 — 不再过滤 Docker/nginx/安全加固相关 commit",
+          "hash": "bcae0dd",
+          "date": "2026-02-26"
+        },
+        {
+          "type": "fix",
+          "message": "AI JSON 解析健壮化 + 视频流 Logto 鉴权 + Docker 部署修复",
+          "hash": "fd35c0f",
+          "date": "2026-02-26"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0226.4",
+      "title": "v1.1.0226.4",
+      "tag": "v1.1.0226.4",
+      "date": "2026-02-26",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "前端 .env.example 补充 Logto 认证配置项",
+          "hash": "52b5533",
+          "date": "2026-02-26"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0226.3",
+      "title": "v1.1.0226.3",
+      "tag": "v1.1.0226.3",
+      "date": "2026-02-26",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "Logto 统一认证接入 — 替换自签 JWT",
+          "hash": "09cfc8b",
+          "date": "2026-02-26"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0226.2",
+      "title": "v1.1.0226.2",
+      "tag": "v1.1.0226.2",
+      "date": "2026-02-26",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "生产环境安全加固 — eval→安全解析、DB连接池、SSE上限、CORS收紧",
+          "hash": "7d6d562",
+          "date": "2026-02-26"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0226.1",
+      "title": "v1.1.0226.1",
+      "tag": "v1.1.0226.1",
+      "date": "2026-02-26",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "AI 学习 JSON 健壮解析 + 视频审核优化 + 代理商报表真实数据 + 申诉流程增强",
+          "hash": "e49697a",
+          "date": "2026-02-26"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0225.5",
+      "title": "v1.1.0225.5",
+      "tag": "v1.1.0225.5",
+      "date": "2026-02-25",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "代理商看板 today_passed 改为真实数据库查询",
+          "hash": "387aca7",
+          "date": "2026-02-25"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0225.4",
+      "title": "v1.1.0225.4",
+      "tag": "v1.1.0225.4",
+      "date": "2026-02-25",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "Brief 平台规则读取品牌方数据 + AI 学习触发修复 + 文件下载代理",
+          "hash": "24f2d39",
+          "date": "2026-02-25"
+        },
+        {
+          "type": "fix",
+          "message": "Brief AI 解析增加详细日志 + 错误提示含 tenant_id",
+          "hash": "e61cc7c",
+          "date": "2026-02-25"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0225.3",
+      "title": "v1.1.0225.3",
+      "tag": "v1.1.0225.3",
+      "date": "2026-02-25",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "回退不合理的共享 AI 配置，改为强制用户先配置",
+          "hash": "4edf336",
+          "date": "2026-02-25"
+        },
+        {
+          "type": "fix",
+          "message": "新注册品牌方 AI 解析失败 — 增加共享 AI 配置回退",
+          "hash": "f17dc6d",
+          "date": "2026-02-25"
+        },
+        {
+          "type": "feat",
+          "message": "品牌方邀请代理商通知流程 + 全面修复 AI 解析与错误处理",
+          "hash": "f29f33e",
+          "date": "2026-02-25"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0225.2",
+      "title": "v1.1.0225.2",
+      "tag": "v1.1.0225.2",
+      "date": "2026-02-25",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "重新生成 changelog — 修正 v1.1.0225.2 条目缺失",
+          "hash": "e84c811",
+          "date": "2026-02-25"
+        },
+        {
+          "type": "fix",
+          "message": "更新日志支持 perf 类型 — 生成脚本+类型定义+Badge展示",
+          "hash": "44be147",
+          "date": "2026-02-25"
+        },
+        {
+          "type": "perf",
+          "message": "审核提交响应优化 — 后置任务异步化",
+          "hash": "52790ca",
+          "date": "2026-02-25"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0225.1",
+      "title": "v1.1.0225.1",
+      "tag": "v1.1.0225.1",
+      "date": "2026-02-25",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "视频审核脚本匹配度分析 + 性能优化（帧压缩+并行化）",
+          "hash": "1c2c40b",
+          "date": "2026-02-25"
+        },
+        {
+          "type": "feat",
+          "message": "AI 审核新增 viral 内容类型 + 更新日志模板改版 + 代理商待办修复",
+          "hash": "0bbcc29",
+          "date": "2026-02-13"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0213.3",
+      "title": "v1.1.0213.3",
+      "tag": "v1.1.0213.3",
+      "date": "2026-02-13",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "浅色/深色主题切换 — CSS 变量 + next-themes，三端支持",
+          "hash": "a285ee0",
+          "date": "2026-02-13"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0213.1",
+      "title": "v1.1.0213.1",
+      "tag": "v1.1.0213.1",
+      "date": "2026-02-13",
+      "entries": [
+        {
+          "type": "fix",
+          "message": "changelog 生成改用 commit 顺序分组，修复同日多 tag 问题",
+          "hash": "e313b59",
+          "date": "2026-02-13"
+        },
+        {
+          "type": "feat",
+          "message": "视频审核优化 + 品牌方个人中心 + 头像上传 + 类型修复",
+          "hash": "53ef62a",
+          "date": "2026-02-13"
+        }
+      ]
+    },
+    {
+      "id": "1.1.0212.2",
+      "title": "1.1.0212.2",
+      "tag": "1.1.0212.2",
+      "date": "2026-02-13",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "Logo 替换 + AI 审核标签中文化 + 高危违规命名 + TOS 下载修复",
+          "hash": "fd78c18",
+          "date": "2026-02-13"
+        }
+      ]
+    },
+    {
+      "id": "v1.1.0212.1",
+      "title": "v1.1.0212.1",
+      "tag": "v1.1.0212.1",
+      "date": "2026-02-12",
+      "entries": [
+        {
+          "type": "feat",
+          "message": "更新日志功能 + AI 审核体系重构 + 品牌学习模块",
+          "hash": "6728a57",
+          "date": "2026-02-12"
+        },
+        {
+          "type": "fix",
+          "message": "移除功效词默认兜底，品牌方未配置则不检查",
+          "hash": "f392c51",
+          "date": "2026-02-12"
+        },
+        {
+          "type": "feat",
+          "message": "AI 审核自动驳回 + 功效词可配置 + UI 修复",
+          "hash": "0b3dfa3",
+          "date": "2026-02-11"
+        },
+        {
+          "type": "feat",
+          "message": "审核体系全面改造 — 多维度评分 + 卖点优先级 + AI 语义匹配 + 品牌方 AI 状态通知",
+          "hash": "0ef7650",
+          "date": "2026-02-11"
+        },
+        {
+          "type": "fix",
+          "message": "文件下载改用 fetch+blob 方式，避免浏览器显示乱码",
+          "hash": "0c59797",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "fix",
+          "message": "代理商平台显示 + Brief 下载预览功能",
+          "hash": "0ab58b7",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "feat",
+          "message": "项目创建/分配代理商时发送消息通知给代理商",
+          "hash": "4ca743e",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "feat",
+          "message": "Brief附件/项目平台/规则AI解析/消息中心修复 + 项目创建通知",
+          "hash": "4c9b2f1",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "feat",
+          "message": "规则冲突检测增强 — 后端接入 DB 规则 + 前端集成检查按钮",
+          "hash": "2f24dcf",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "feat",
+          "message": "前端平台规则页面支持文档上传 + AI 解析",
+          "hash": "3a2598c",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "feat",
+          "message": "平台规则从硬编码改为品牌方上传文档 + AI 解析",
+          "hash": "fed361b",
+          "date": "2026-02-10"
+        },
+        {
+          "type": "feat",
+          "message": "添加密码重置功能",
+          "hash": "3a6e25b",
+          "date": "2026-02-09"
+        },
+        {
+          "type": "feat",
+          "message": "实现邮箱验证码注册/登录功能",
+          "hash": "d408134",
+          "date": "2026-02-09"
+        },
+        {
+          "type": "fix",
+          "message": "修复达人端上传脚本按钮无响应问题",
+          "hash": "f634879",
+          "date": "2026-02-09"
+        },
+        {
+          "type": "docs",
+          "message": "完善项目约定文档",
+          "hash": "4b8809e",
+          "date": "2026-02-09"
+        },
+        {
+          "type": "feat",
+          "message": "完善审核台文件预览与消息通知系统",
+          "hash": "a5a005d",
+          "date": "2026-02-09"
+        },
+        {
+          "type": "feat",
+          "message": "添加 AI 服务状态监控和警告功能",
+          "hash": "bbc8a4f",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "为所有终端添加平台显示功能",
+          "hash": "0bfedb9",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "完善品牌方和代理商前端功能",
+          "hash": "964797d",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "数据报表添加时间切换和导出功能",
+          "hash": "dbf9de6",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "达人管理添加操作菜单功能",
+          "hash": "9f15709",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "达人管理添加任务进度展开提示",
+          "hash": "9a0e2ca",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "优化达人管理页面",
+          "hash": "ad45da5",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "优化审核台列表页并新增申诉处理功能",
+          "hash": "66748d4",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "工作台统计数据分类显示脚本和视频",
+          "hash": "576c89c",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "完成代理商/品牌方前端及文档更新",
+          "hash": "4753626",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "完成达人端前端页面开发",
+          "hash": "2f9b7f0",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "优化创建项目页面代理商选择区域",
+          "hash": "1011e73",
+          "date": "2026-02-06"
+        },
+        {
+          "type": "feat",
+          "message": "创建项目改为完整页面并添加系统设置到侧边栏",
+          "hash": "dc37fda",
+          "date": "2026-02-05"
+        },
+        {
+          "type": "feat",
+          "message": "更新品牌方端菜单结构并添加创建项目功能",
+          "hash": "521d1a1",
+          "date": "2026-02-05"
+        },
+        {
+          "type": "docs",
+          "message": "完善 TDD 计划与项目名称统一",
+          "hash": "d52509d",
+          "date": "2026-02-04"
+        },
+        {
+          "type": "docs",
+          "message": "完善文档体系与一致性修复",
+          "hash": "2f2f7e0",
+          "date": "2026-02-03"
+        }
+      ]
+    }
+  ]
+}
