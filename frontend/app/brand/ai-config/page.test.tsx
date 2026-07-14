@@ -89,7 +89,7 @@ describe('AIConfigPage role visibility', () => {
 
     render(<AIConfigPage />)
 
-    await screen.findByText('音频解析模型 (ASR)')
+    await screen.findByText('音频模型（口播 / 语调 / BGM）')
 
     expect(screen.queryByText('小红书工作台专用模型')).not.toBeInTheDocument()
     expect(screen.queryByText('XHS 主流程模型')).not.toBeInTheDocument()

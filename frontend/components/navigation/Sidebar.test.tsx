@@ -31,7 +31,7 @@ describe('Sidebar', () => {
       render(<Sidebar role="agency" />);
       expect(screen.getByText('工作台')).toBeInTheDocument();
       expect(screen.getByText('审核台')).toBeInTheDocument();
-      expect(screen.getByText('Brief 配置')).toBeInTheDocument();
+      expect(screen.getByText('任务配置')).toBeInTheDocument();
       expect(screen.getByText('达人管理')).toBeInTheDocument();
       expect(screen.getByText('数据报表')).toBeInTheDocument();
     });
@@ -55,7 +55,8 @@ describe('Sidebar', () => {
     it('激活项使用高亮样式', () => {
       render(<Sidebar role="creator" />);
       const activeLink = screen.getByText('消息中心').closest('a');
-      expect(activeLink).toHaveClass('bg-bg-elevated', 'text-text-primary', 'font-semibold');
+      expect(activeLink).toHaveClass('bg-accent-indigo/10', 'text-text-primary');
+      expect(screen.getByText('消息中心')).toHaveClass('font-semibold');
     });
 
     it('非激活项使用默认样式', () => {

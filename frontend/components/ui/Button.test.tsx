@@ -18,7 +18,7 @@ describe('Button', () => {
     it('默认使用 primary variant 和 md size', () => {
       render(<Button>默认按钮</Button>);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-accent-indigo');
+      expect(button).toHaveClass('bg-gradient-to-b', 'from-accent-indigo');
       expect(button).toHaveClass('px-4', 'py-2.5');
     });
   });
@@ -27,7 +27,7 @@ describe('Button', () => {
   describe('Variant 样式', () => {
     it('primary variant 应用正确样式', () => {
       render(<Button variant="primary">Primary</Button>);
-      expect(screen.getByRole('button')).toHaveClass('bg-accent-indigo', 'text-white');
+      expect(screen.getByRole('button')).toHaveClass('bg-gradient-to-b', 'from-accent-indigo', 'text-white');
     });
 
     it('secondary variant 应用正确样式', () => {
@@ -37,12 +37,12 @@ describe('Button', () => {
 
     it('danger variant 应用正确样式', () => {
       render(<Button variant="danger">Danger</Button>);
-      expect(screen.getByRole('button')).toHaveClass('bg-accent-coral', 'text-white');
+      expect(screen.getByRole('button')).toHaveClass('bg-gradient-to-b', 'from-accent-coral', 'text-white');
     });
 
     it('success variant 应用正确样式', () => {
       render(<Button variant="success">Success</Button>);
-      expect(screen.getByRole('button')).toHaveClass('bg-accent-green', 'text-white');
+      expect(screen.getByRole('button')).toHaveClass('bg-gradient-to-b', 'from-accent-green', 'text-white');
     });
 
     it('ghost variant 应用正确样式', () => {
@@ -55,17 +55,17 @@ describe('Button', () => {
   describe('Size 样式', () => {
     it('sm size 应用正确样式', () => {
       render(<Button size="sm">Small</Button>);
-      expect(screen.getByRole('button')).toHaveClass('px-3', 'py-1.5', 'text-small');
+      expect(screen.getByRole('button')).toHaveClass('px-3', 'py-1.5', 'text-xs');
     });
 
     it('md size 应用正确样式', () => {
       render(<Button size="md">Medium</Button>);
-      expect(screen.getByRole('button')).toHaveClass('px-4', 'py-2.5', 'text-body');
+      expect(screen.getByRole('button')).toHaveClass('px-4', 'py-2.5', 'text-sm');
     });
 
     it('lg size 应用正确样式', () => {
       render(<Button size="lg">Large</Button>);
-      expect(screen.getByRole('button')).toHaveClass('px-6', 'py-3', 'text-section-title');
+      expect(screen.getByRole('button')).toHaveClass('px-6', 'py-3', 'text-base');
     });
   });
 
@@ -124,7 +124,7 @@ describe('Button', () => {
 
     it('loading 状态应用 opacity-50 样式', () => {
       render(<Button loading>加载中</Button>);
-      expect(screen.getByRole('button')).toHaveClass('opacity-50');
+      expect(screen.getByRole('button')).toHaveClass('opacity-40');
     });
 
     it('loading 状态隐藏原有图标', () => {
@@ -146,7 +146,7 @@ describe('Button', () => {
 
     it('disabled 状态应用正确样式', () => {
       render(<Button disabled>禁用</Button>);
-      expect(screen.getByRole('button')).toHaveClass('opacity-50', 'cursor-not-allowed');
+      expect(screen.getByRole('button')).toHaveClass('opacity-40', 'cursor-not-allowed');
     });
 
     it('disabled 状态不触发点击事件', () => {

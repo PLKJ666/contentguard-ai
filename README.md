@@ -167,7 +167,8 @@ docker compose up -d --build
 - 后端目标测试：142/142 通过
 - 后端完整测试：518 通过，2 个 Celery worker 用例在全量顺序下存在环境敏感超时，隔离运行通过
 - 前端身份相关测试：45/45 通过
-- 前端 lint、TypeScript 类型检查和生产构建：通过
+- 前端完整 Vitest：28 个测试文件、403/403 通过
+- 前端 lint、TypeScript 类型检查和生产构建：通过，lint/build 保留 5 个既有 `no-img-element` 警告
 - 公开信息扫描：无旧项目标识、私有 IP 和明文密钥
 
 详细记录见 [ECC_AUDIT_REPORT.md](ECC_AUDIT_REPORT.md)。

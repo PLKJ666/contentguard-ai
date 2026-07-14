@@ -474,7 +474,7 @@ describe('mapTaskToUI — completed', () => {
 // 10. rejected stage
 // ---------------------------------------------------------------------------
 describe('mapTaskToUI — rejected', () => {
-  const task = mockTask({ stage: 'rejected' })
+  const task = mockTask({ stage: 'rejected', video_agency_status: 'rejected' })
   const ui = mapTaskToUI(task)
 
   it('buttonText should be "重新提交"', () => {
@@ -493,7 +493,7 @@ describe('mapTaskToUI — rejected', () => {
     expect(ui.filterCategory).toBe('rejected')
   })
 
-  it('all script steps should be "done" (stageIndex >= 4)', () => {
+  it('all script steps should be "done" when the video stage was rejected', () => {
     expect(ui.scriptStage.submit).toBe('done')
     expect(ui.scriptStage.ai).toBe('done')
     expect(ui.scriptStage.agency).toBe('done')

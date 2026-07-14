@@ -33,7 +33,8 @@ export const Card: React.FC<CardProps> = ({
         transition-all duration-300 ease-in-out
         ${paddingStyles[padding]}
         ${variant === 'elevated' ? 'bg-bg-elevated shadow-elevated border-border-strong/50' : 'shadow-sm'}
-        ${hoverable ? 'cursor-pointer hover:border-accent-indigo/30 hover:shadow-indigo/10 hover:translate-y-[-2px]' : ''}
+        ${hoverable ? 'hover:border-accent-indigo/30 hover:shadow-indigo/10 hover:translate-y-[-2px]' : ''}
+        ${hoverable || onClick ? 'cursor-pointer' : ''}
         ${onClick ? 'active:scale-[0.99]' : ''}
         ${className}
       `}

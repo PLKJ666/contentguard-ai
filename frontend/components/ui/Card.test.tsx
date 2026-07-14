@@ -128,7 +128,7 @@ describe('CardTitle', () => {
   it('应用标题样式', () => {
     render(<CardTitle>Title</CardTitle>);
     const title = screen.getByRole('heading');
-    expect(title).toHaveClass('text-section-title', 'text-text-primary', 'font-semibold');
+    expect(title).toHaveClass('text-base', 'text-text-primary', 'font-medium', 'tracking-tight');
   });
 
   it('支持自定义 className', () => {

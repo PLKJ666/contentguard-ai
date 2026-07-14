@@ -39,13 +39,13 @@
 ## 发布前复核
 
 ```text
-[ ] 扫描公开文件中的旧标识、私有域名、内网地址和长令牌
-[ ] 检查 .env、backend/.env 和备份文件未被纳入发布内容
-[ ] 确认数据库模型、迁移链、API 契约和任务状态没有非必要变化
-[ ] 运行后端编译、锁文件检查和目标测试
-[ ] 运行前端 lint、类型检查、测试和生产构建
-[ ] 使用占位配置执行 Docker Compose 配置校验
-[ ] 在发布说明中注明 Logto、AI、TOS、PostgreSQL 和 Redis 是外部依赖
+[x] 扫描公开文件中的旧标识、私有域名、内网地址和长令牌
+[x] 检查 .env、backend/.env 和备份文件未被纳入发布内容
+[x] 确认数据库模型、迁移链、API 契约和任务状态没有非必要变化
+[x] 运行后端编译、锁文件检查和目标测试
+[x] 运行前端 lint、类型检查、测试和生产构建
+[x] 使用占位配置执行 Docker Compose 配置校验
+[x] 在发布说明中注明 Logto、AI、TOS、PostgreSQL 和 Redis 是外部依赖
 ```
 
 ## 本次验证证据
@@ -62,10 +62,11 @@
 | `npm run lint` | 通过，保留 5 个既有 `no-img-element` 警告 |
 | `npx tsc --noEmit` | 通过 |
 | `npm run build` | 通过 |
-| 前端完整 Vitest | 仍有 33 个既有 UI/状态契约失败，未发现脱敏相关失败 |
-| Compose 配置校验 | YAML 解析通过；完整 Compose 需先创建本地 `.env` 和 `backend/.env` |
+| 前端完整 Vitest | 28 个测试文件、403/403 通过；补齐阶段状态和可点击 Card 交互回归，并同步当前 UI 契约 |
+| 公开信息扫描 | 通过；无旧项目标识、私有 IP 或真实长令牌，文档中的 `sk-xxxxxxxx...` 为示例占位符 |
+| Compose 配置校验 | 使用临时占位 `backend/.env` 执行 `docker compose config --quiet` 通过；临时文件已删除 |
 
-前端完整测试的失败集中在既有的 `taskStageMapper`、Tag/Card/Modal 样式契约和 AI 配置页面断言；这些失败与本次身份、配置模板、文档和运营开通码改动无关，未在本次脱敏任务中扩大修改范围。
+本轮修复了两类问题：一是任务已有 AI 结果时阶段映射仍显示为进行中，二是 UI 测试仍断言旧版视觉 token、导航样式和 AI 配置文案；同时为带 `onClick` 的 Card 补充 `cursor-pointer` 交互提示。业务流程、API 契约和数据模型没有因此改动。
 
 ## 结论
 

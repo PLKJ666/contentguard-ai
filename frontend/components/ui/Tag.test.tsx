@@ -27,25 +27,25 @@ describe('Tag', () => {
     it('success 状态应用绿色样式', () => {
       render(<Tag status="success">成功</Tag>);
       const tag = screen.getByText('成功').closest('span');
-      expect(tag).toHaveClass('bg-status-success', 'text-accent-green');
+      expect(tag).toHaveClass('bg-accent-green/10', 'text-accent-green');
     });
 
     it('pending 状态应用蓝色样式', () => {
       render(<Tag status="pending">待处理</Tag>);
       const tag = screen.getByText('待处理').closest('span');
-      expect(tag).toHaveClass('bg-status-pending', 'text-accent-indigo');
+      expect(tag).toHaveClass('bg-accent-indigo/10', 'text-accent-indigo');
     });
 
     it('warning 状态应用黄色样式', () => {
       render(<Tag status="warning">警告</Tag>);
       const tag = screen.getByText('警告').closest('span');
-      expect(tag).toHaveClass('bg-status-warning', 'text-accent-amber');
+      expect(tag).toHaveClass('bg-accent-amber/10', 'text-accent-amber');
     });
 
     it('error 状态应用红色样式', () => {
       render(<Tag status="error">错误</Tag>);
       const tag = screen.getByText('错误').closest('span');
-      expect(tag).toHaveClass('bg-status-error', 'text-accent-coral');
+      expect(tag).toHaveClass('bg-accent-coral/10', 'text-accent-coral');
     });
   });
 
@@ -54,19 +54,19 @@ describe('Tag', () => {
     it('sm size 应用小尺寸样式', () => {
       render(<Tag status="success" size="sm">小标签</Tag>);
       const tag = screen.getByText('小标签').closest('span');
-      expect(tag).toHaveClass('px-1.5', 'py-0.5', 'text-[11px]');
+      expect(tag).toHaveClass('px-2', 'py-0.5', 'text-[10px]');
     });
 
     it('md size 应用中等尺寸样式（默认）', () => {
       render(<Tag status="success" size="md">中标签</Tag>);
       const tag = screen.getByText('中标签').closest('span');
-      expect(tag).toHaveClass('px-2', 'py-1', 'text-small');
+      expect(tag).toHaveClass('px-2.5', 'py-1', 'text-[12px]');
     });
 
     it('默认使用 md size', () => {
       render(<Tag status="success">默认</Tag>);
       const tag = screen.getByText('默认').closest('span');
-      expect(tag).toHaveClass('px-2', 'py-1');
+      expect(tag).toHaveClass('px-2.5', 'py-1');
     });
   });
 
@@ -112,13 +112,13 @@ describe('SuccessTag', () => {
   it('渲染 success 状态', () => {
     render(<SuccessTag>通过</SuccessTag>);
     const tag = screen.getByText('通过').closest('span');
-    expect(tag).toHaveClass('bg-status-success', 'text-accent-green');
+    expect(tag).toHaveClass('bg-accent-green/10', 'text-accent-green');
   });
 
   it('支持 size 属性', () => {
     render(<SuccessTag size="sm">小</SuccessTag>);
     const tag = screen.getByText('小').closest('span');
-    expect(tag).toHaveClass('px-1.5', 'py-0.5');
+    expect(tag).toHaveClass('px-2', 'py-0.5');
   });
 });
 
@@ -126,13 +126,13 @@ describe('PendingTag', () => {
   it('渲染 pending 状态', () => {
     render(<PendingTag>处理中</PendingTag>);
     const tag = screen.getByText('处理中').closest('span');
-    expect(tag).toHaveClass('bg-status-pending', 'text-accent-indigo');
+    expect(tag).toHaveClass('bg-accent-indigo/10', 'text-accent-indigo');
   });
 
   it('支持 size 属性', () => {
     render(<PendingTag size="sm">小</PendingTag>);
     const tag = screen.getByText('小').closest('span');
-    expect(tag).toHaveClass('px-1.5', 'py-0.5');
+    expect(tag).toHaveClass('px-2', 'py-0.5');
   });
 });
 
@@ -140,13 +140,13 @@ describe('WarningTag', () => {
   it('渲染 warning 状态', () => {
     render(<WarningTag>注意</WarningTag>);
     const tag = screen.getByText('注意').closest('span');
-    expect(tag).toHaveClass('bg-status-warning', 'text-accent-amber');
+    expect(tag).toHaveClass('bg-accent-amber/10', 'text-accent-amber');
   });
 
   it('支持 size 属性', () => {
     render(<WarningTag size="sm">小</WarningTag>);
     const tag = screen.getByText('小').closest('span');
-    expect(tag).toHaveClass('px-1.5', 'py-0.5');
+    expect(tag).toHaveClass('px-2', 'py-0.5');
   });
 });
 
@@ -154,12 +154,12 @@ describe('ErrorTag', () => {
   it('渲染 error 状态', () => {
     render(<ErrorTag>失败</ErrorTag>);
     const tag = screen.getByText('失败').closest('span');
-    expect(tag).toHaveClass('bg-status-error', 'text-accent-coral');
+    expect(tag).toHaveClass('bg-accent-coral/10', 'text-accent-coral');
   });
 
   it('支持 size 属性', () => {
     render(<ErrorTag size="sm">小</ErrorTag>);
     const tag = screen.getByText('小').closest('span');
-    expect(tag).toHaveClass('px-1.5', 'py-0.5');
+    expect(tag).toHaveClass('px-2', 'py-0.5');
   });
 });

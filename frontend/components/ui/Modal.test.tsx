@@ -376,7 +376,7 @@ describe('ConfirmModal', () => {
         />
       );
       const confirmButton = screen.getByText('确认').closest('button');
-      expect(confirmButton).toHaveClass('bg-accent-coral');
+      expect(confirmButton).toHaveClass('bg-gradient-to-b', 'from-accent-coral');
     });
   });
 

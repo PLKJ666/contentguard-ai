@@ -79,7 +79,7 @@ export function mapTaskToUI(task: TaskResponse): TaskUIState {
     }
   } else if (stage === 'script_ai_review') {
     scriptStage.submit = 'done'
-    scriptStage.ai = 'current'
+    scriptStage.ai = task.script_ai_result ? 'done' : 'current'
   } else if (stage === 'script_agency_review') {
     scriptStage.submit = 'done'
     scriptStage.ai = 'done'
@@ -151,7 +151,7 @@ export function mapTaskToUI(task: TaskResponse): TaskUIState {
     }
   } else if (stage === 'video_ai_review') {
     videoStage.submit = 'done'
-    videoStage.ai = 'current'
+    videoStage.ai = task.video_ai_result ? 'done' : 'current'
   } else if (stage === 'video_agency_review') {
     videoStage.submit = 'done'
     videoStage.ai = 'done'
