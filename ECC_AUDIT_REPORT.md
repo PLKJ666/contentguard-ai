@@ -74,6 +74,7 @@
 
 - Workflow 文件为 `.github/workflows/ci.yml`，触发条件为 push 到 `main`、面向 `main` 的 Pull Request 和 `workflow_dispatch` 手动运行；前端与后端 job 独立并行。
 - 前端 job 固定 Node 20，执行 `npm ci --no-audit --no-fund`、lint、TypeScript、完整 Vitest 和生产构建；后端 job 固定 Python 3.12，执行 `uv sync --extra dev --frozen`、锁文件检查、编译检查和稳定 pytest 集合。
+- workflow 使用 `actions/checkout@v7`、`actions/setup-node@v7`、`actions/setup-python@v6` 和固定版本 `astral-sh/setup-uv@v8.3.2`，这些官方 action 使用 Node 24 runtime，消除了 runner 对 Node 20 runtime 的迁移警告。
 - workflow 只授予 `contents: read`，仅使用 CI 测试环境变量，不包含生产 Secrets、镜像推送、SSH 部署、Webhook、生产主机或外部 Registry。
 - 后端快速门禁明确排除 `slow`、`integration`、`e2e`；真实 Celery worker、容器依赖的 health/XHS batch integration/e2e 测试保留为独立手动边界，避免当前已知的顺序、环境敏感超时和外部依赖拖慢 Pull Request 反馈。
 
