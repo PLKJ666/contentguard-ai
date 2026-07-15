@@ -208,6 +208,7 @@ docker compose up -d --build
 - 前端身份相关测试：45/45 通过
 - 前端完整 Vitest：28 个测试文件、403/403 通过
 - 前端 lint、TypeScript 类型检查和生产构建：通过，lint/build 保留 5 个既有 `no-img-element` 警告
+- GitHub Actions 质量门禁：`main` push、面向 `main` 的 Pull Request 和手动触发会并行执行前端完整检查与后端稳定测试；真实 Celery、容器依赖的 integration/e2e 测试暂作为独立手动边界，待环境敏感超时和依赖条件解决后再纳入快速门禁
 - 作品集展示资产：3 张脱敏界面图和 1 张当前架构图已加入 README
 - 公开信息扫描：无旧项目标识、私有 IP 和明文密钥
 

@@ -64,9 +64,18 @@
 | `npx tsc --noEmit` | 通过 |
 | `npm run build` | 通过 |
 | 前端完整 Vitest | 28 个测试文件、403/403 通过；补齐阶段状态和可点击 Card 交互回归，并同步当前 UI 契约 |
+| 后端 CI 稳定测试（`-m "not slow and not integration and not e2e"`） | 510 通过、2 跳过、11 个被选择器排除的测试用例；本地对等复跑通过 |
+| 前端 CI 对等复跑 | `npm ci --no-audit --no-fund`、lint、TypeScript、Vitest 和生产构建全部通过 |
 | 作品集展示资产 | 3 张 PNG 界面图和 1 张 SVG 架构图通过浏览器渲染与目视检查；使用虚构数据，无旧品牌或运行时错误状态 |
 | 公开信息扫描 | 通过；无旧项目标识、私有 IP 或真实长令牌，文档中的 `sk-xxxxxxxx...` 为示例占位符 |
 | Compose 配置校验 | 使用临时占位 `backend/.env` 执行 `docker compose config --quiet` 通过；临时文件已删除 |
+
+### GitHub Actions 持续集成边界
+
+- Workflow 文件为 `.github/workflows/ci.yml`，触发条件为 push 到 `main`、面向 `main` 的 Pull Request 和 `workflow_dispatch` 手动运行；前端与后端 job 独立并行。
+- 前端 job 固定 Node 20，执行 `npm ci --no-audit --no-fund`、lint、TypeScript、完整 Vitest 和生产构建；后端 job 固定 Python 3.12，执行 `uv sync --extra dev --frozen`、锁文件检查、编译检查和稳定 pytest 集合。
+- workflow 只授予 `contents: read`，仅使用 CI 测试环境变量，不包含生产 Secrets、镜像推送、SSH 部署、Webhook、生产主机或外部 Registry。
+- 后端快速门禁明确排除 `slow`、`integration`、`e2e`；真实 Celery worker、容器依赖的 health/XHS batch integration/e2e 测试保留为独立手动边界，避免当前已知的顺序、环境敏感超时和外部依赖拖慢 Pull Request 反馈。
 
 本轮完成了作品集展示层收尾：重新生成了不含原始组织信息的产品界面图和架构图，并按 `A + B` 结构补充 README 案例叙事。此前修复的阶段映射、可点击 Card 交互和 UI 测试契约继续保持。业务流程、API 契约和数据模型没有因此改动。
 
